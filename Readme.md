@@ -15,6 +15,12 @@ Where `organization` is the organization name in GitHub, the `dependency` is a G
 
 `credentials` are the username and password to be used when calling GitHub API.
 
+## running test cases
+
+```
+$ mocha
+```
+
 ## Comming Soon
 
 - Send automated Pull Requests.
