@@ -1,0 +1,21 @@
+{
+  "name": "list-repos",
+  "version": "0.0.1",
+  "description": "List unupdated repos",
+  "main": "list-repos.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "latest",
+    "yargs": "latest",
+    "github": "0.2.4",
+    "q": "latest"
+  },
+  "devDependencies": {
+    "mocha": "latest",
+    "should": "latest"
+  }
+}
