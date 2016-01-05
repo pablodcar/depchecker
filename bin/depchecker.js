@@ -22,12 +22,15 @@ var organization = argv.o;
 var dependency = argv.d;
 var tag = argv.t;
 var credentials = argv.c.split(':');
+var repoName = _.last(dependency.split('/'));
 
 var createEvent = {
   ref_type: 'tag',
   ref: tag,
   repository: {
-    git_url: dependency
+    git_url: dependency,
+    name: repoName,
+    fullName: repoName
   },
   organization: {
     login: organization
@@ -45,14 +48,17 @@ var options = {
 
 var depChecker = depchecker(options);
 
-function printRepos(repos) {
-  console.log(_.map(repos, function(repo) {
-    return 'Repo: ' + repo.fullName + '\n' +
-      _.map(repo.changes, function(changeValue, changeKey) {
-        return 'From: ' + changeKey + ', To: ' + changeValue;
+function printActions(prsAndRepos) {
+  console.log(_.map(prsAndRepos, function(repoPr) {
+    return 'Repo: ' + repoPr.repo.fullName + '\n' +
+      _.map(repoPr.repo.changes, function(changeValue, changeKey) {
+        return 'From: ' + changeKey + ', To: ' + changeValue +
+          ', Pull Request: ' + repoPr.pullRequest.url;
       }).join('\n');
   }).join('//////////////////////////////////////\n'));
 }
+var Q = require('q');
+
 
 function unupdatedRepos(error, repos) {
   if (error) {
@@ -68,7 +74,11 @@ function unupdatedRepos(error, repos) {
     .then(function(repos) {
       return depChecker.updatedRepos(tagUpdated, repos);
     })
-    .done(printRepos);
+    .then(function(repos) {
+      var pullRequests = _.map(repos, depChecker.pullRequest);
+      return Q.all(pullRequests);
+    })
+    .done(printActions);
 }
 
 function printChanges() {

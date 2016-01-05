@@ -164,7 +164,10 @@ describe('DepChecker', function() {
   function getDepchecker(packageJsonMap) {
     if (packageJsonMap) {
       return depchecker({
-        gitHubApi: githubMock(packageJsonMap)
+        gitHubApi: githubMock({
+          packageJsonMap: packageJsonMap,
+          organization: 'pablodcar-test'
+        })
       });
     } else {
       return depchecker({
@@ -215,7 +218,10 @@ describe('DepChecker', function() {
     };
   }
 
-  function githubMock(repoFullNamePackageJsonMap) {
+  function githubMock(options) {
+
+    var repoFullNamePackageJsonMap = options.packageJsonMap;
+    var organization = options.organization;
 
     return {
       getPackageJson: function getPackageJson(rawRepoData) {
@@ -225,8 +231,27 @@ describe('DepChecker', function() {
         }
         return Q.fcall(packageJsonMock);
       },
-      getRepos: function() {
+      getRepos: function getRepos() {
         return Q.fcall(getRepos);
+      },
+      getHeadMasterReference: function getHeadMasterReference(repo) {
+        return {
+          ref: 'refs/heads/master',
+          url: 'https://api.github.com/repos/' + organization + '/' + repo.name + '/git/refs/heads/master',
+          object: {
+            sha: 'f2c8d807ef34d64afc15ce95ef8f8d4c53c48120',
+            type: 'commit',
+            url: 'https://api.github.com/repos/' + organization + '/' + repo.name + '/git/commits/f2c8d807ef34d64afc15ce95ef8f8d4c53c48120'
+          },
+          meta: {
+            'x-ratelimit-limit': '5000',
+            'x-ratelimit-remaining': '4894',
+            'x-ratelimit-reset': '1451967401',
+            'last-modified': 'Wed, 30 Dec 2015 14:33:03 GMT',
+            etag: '"21a785448fe668a657b8a3d5d474ae60"',
+            status: '200 OK'
+          }
+        };
       }
     };
 
