@@ -23,7 +23,7 @@ $ mocha
 
 ## Comming Soon
 
-- Send automated Pull Requests.
+- Included. ~~Send automated Pull Requests~~
 - Support for other formats for GitHub URLs.
-- [Webtask](https://webtask.io/) to configure as a Github hook.
+- Included. ~~[Webtask](https://webtask.io/) to configure as a Github hook~~
 - Use of [semver](http://semver.org/) to detect when a repository is out-of-date.
