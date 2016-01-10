@@ -19,7 +19,7 @@ Where `organization` is the organization name in GitHub, the `dependency` is a G
 
 ### As a [Webtask](https://webtask.io/) 
 
-1. Build the webtask using webpack. A dist/depchecker.js file will be created.
+1. Build the webtask using ```gulp bundle```. A dist/depchecker.js file will be created.
 2. Deploy the webtask with a GitHub personal token as secret in the variable GITHUB_TOKEN, e.g. using `wt`: ```$ wt create --secret GITHUB_TOKEN=b688265ee6985408646507f1f4bb5663bb3243d4 dist/depchecker.js```
 3. Configure a webhook pointing to the webtask, and only check the *Create* event.
 
@@ -36,5 +36,7 @@ $ mocha
 - Included. ~~Send automated Pull Requests~~
 - Support for other formats for GitHub URLs.
 - Included. ~~[Webtask](https://webtask.io/) to configure as a Github hook~~
-- Use of [semver](http://semver.org/) to detect when a repository is out-of-date.
-- Build and deploy of the webtask using Gulp.
+- ~~Use of [semver](http://semver.org/) to detect when a repository is out-of-date.~~
+- ~~Build and deploy of the webtask using Gulp.~~
+- Security mechanism to do not leave the webtask open to the world.
+
