@@ -31,12 +31,14 @@ You are done, when a tag is created, the webtask receives the event, traverse al
 $ mocha
 ```
 
+## Features
+
+- Send automated Pull Requests
+- [Webtask](https://webtask.io/) to configure as a Github hook
+- Use of [semver](http://semver.org/) to detect when a repository is out-of-date.
+
 ## Comming Soon
 
-- Included. ~~Send automated Pull Requests~~
 - Support for other formats for GitHub URLs.
-- Included. ~~[Webtask](https://webtask.io/) to configure as a Github hook~~
-- ~~Use of [semver](http://semver.org/) to detect when a repository is out-of-date.~~
-- ~~Build and deploy of the webtask using Gulp.~~
 - Security mechanism to do not leave the webtask open to the world.
 
